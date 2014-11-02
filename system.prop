@@ -1,0 +1,266 @@
+#
+# system.prop for w7
+#
+
+# Use reference RIL for initial bringup
+#rild.libpath=/system/lib/libreference-ril.so
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/smd0
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+ril.subscription.types=NV,RUIM
+DEVICE_PROVISIONED=1
+persist.radio.msgtunnel.start=false
+# Start in cdma mode
+
+#
+# system props for the cne module
+#
+persist.cne.feature=0
+
+
+# Skip /sys/power/wait_for_fb_* nodes and
+# force FB to be always on
+debug.sf.fb_always_on=1
+
+debug.sf.hw=1
+debug.egl.hw=1
+debug.composition.type=c2d
+persist.hwc.mdpcomp.enable=true
+debug.mdpcomp.logs=0
+dalvik.vm.heapsize=36m
+dev.pm.dyn_samplingrate=1
+
+persist.demo.hdmirotationlock=false
+ro.hdmi.enable=true
+qcom.hw.aac.encoder=true
+
+#system props for the MM modules
+
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+mmp.enable.3g2=true
+media.aac_51_output_enabled=true
+mm.enable.smoothstreaming=true
+#9273 is decimal sum of supported codecs in AAL
+#codecs:(PARSER_)AVI AC3 ASF AAC QCP DTS 3G2 MP2TS
+mm.enable.qcom_parser=37491
+
+# VIDC: debug_levels
+# 1:ERROR 2:HIGH 4:LOW 0:NOlogs 7:AllLogs
+vidc.debug.level=1
+#
+# system props for the data modules
+#
+ro.use_data_netmgrd=true
+#2013-08-31 kwangbin.yim@lge.com LGP_DATA_TEMPORARY_PATCH_FOR_KK_APP_TEST[START]
+#persist.data.netmgrd.qos.enable=true
+persist.data.netmgrd.qos.enable=false
+#2013-08-31 kwangbin.yim@lge.com LGP_DATA_TEMPORARY_PATCH_FOR_KK_APP_TEST[END]
+
+#system props for time-services
+persist.timed.enable=true
+
+#
+# system prop for opengles version
+#
+# 196608 is decimal for 0x30000 to report version 3
+ro.opengles.version=196608
+
+#
+# System props for telephony
+# System prop to turn on CdmaLTEPhone always
+# LGE_CHANGE_S by.mun@lge.com 2013-08-14 turn off CdmaLTEPhone for W7
+telephony.lteOnCdmaDevice=0
+
+# simulate sdcard on /data/media
+#
+persist.fuse_sdcard=true
+
+#
+#snapdragon value add features
+#
+ro.qc.sdk.audio.ssr=false
+
+# Voice Clarity feature
+persist.audio.voice.clarity=none
+
+##fluencetype can be "fluence" or "fluencepro" or "none"
+#DO NOT Modify [W7_TMUS], If You Need, redefine in your model.mk
+#ro.qc.sdk.audio.fluencetype=none
+#persist.audio.fluence.voicecall=false
+persist.audio.fluence.voicerec=false
+#persist.audio.fluence.speaker=false
+
+# Reduce Background apps limit
+ro.sys.fw.bg_apps_limit=20
+
+# Enable/disable cabl
+ro.qualcomm.cabl=0
+
+# system prop for NFC DT
+ro.nfc.port=
+
+#property to enable user to access Google WFD settings
+persist.debug.wfd.enable=1
+##property to choose between virtual/external wfd display
+persist.sys.wfd.virtual=0
+tunnel.audio.encode = true
+
+#use VERY_HIGH_QUALITY for audio resampler
+af.resampler.quality=4
+
+#Buffer size in kbytes for compress offload playback
+audio.offload.buffer.size.kbytes=32
+
+#Enable offload audio video playback by default
+av.offload.enable=false
+
+# system props for telephony framework
+# LGE_CHANGE_S, [SMS_Patch_0001][TEL-FRW-MSG@lge.com][EU,OPEN,NA,AS], 2013-01-22, encode/decode base [
+persist.gsm.sms.forcegsm7=1
+# LGE_CHANGE_E, [SMS_Patch_0001][TEL-FRW-MSG@lge.com][EU,OPEN,NA,AS], 2013-01-22, encode/decode Base ]
+
+# LGE_CHANGE_S, [WiFi][hayun.kim@lge.com], 2013-01-22, Wifi Bring Up
+# reserved wifi related property
+dhcp.ap.macaddress=
+dhcp.wlan0.dns1=
+dhcp.wlan0.dns2=
+dhcp.wlan0.dns3=
+dhcp.wlan0.dns4=
+dhcp.wlan0.gateway=
+dhcp.wlan0.ipaddress=
+dhcp.wlan0.leasetime=
+dhcp.wlan0.mask=
+dhcp.wlan0.pid=
+dhcp.wlan0.reason=
+dhcp.wlan0.result=
+dhcp.wlan0.server=
+dhcp.wlan0.vendorInfo=
+init.svc.dhcpcd_wlan0=
+init.svc.p2p_supplicant=
+init.svc.iprenew_wlan0=
+net.dns1=
+net.dns2=
+net.dnschange=
+net.wlan0.dns1=
+net.wlan0.dns2=
+wlan.driver.status=
+persist.sys.security=
+persist.sys.hotssid.ksc5601=
+wifi.lge.autochannel=
+wlan.driver.firmware=
+# LGE_CHANGE_S, [WiFi][hayun.kim@lge.com], 2013-01-22, Wifi Bring Up
+
+# Modem Logging
+persist.service.mdlog.enable=0
+
+# Define Front key LED feature
+lge.hw.frontkeyled=false
+
+# system props for LockScreen
+keyguard.no_require_sim=true
+# system props for LockScreen
+
+#
+# ADDITIONAL_BUILD_PROPERTIES
+#
+log.tag.GpsLocationProvider=DEBUG
+log.tag.LocationManagerService=DEBUG
+log.tag.NlpProxy=DEBUG
+log.tag.LocSvc_java=DEBUG
+ime_vibration_pattern=0:38
+ime_handwriting_apply=false
+bluetooth.chip.vendor=qcom
+bluetooth.pan=true
+service.bt.support.busytone=true
+ro.config.ringtone=01_T-Jingle.ogg
+ro.config.notification_sound=Crystal.ogg
+ro.config.alarm_alert=Lifes_Good_Alarm.ogg
+ro.config.timer_alert=Timer.ogg
+ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.nsenabled=ON
+persist.audio.fluence.voicecall=true
+use.voice.path.for.pcm.voip=true
+ro.config.vc_call_vol_steps=6
+ro.config.vc_call_vol_default=3
+ro.lge.bt_gain_control_factor=1
+persist.gsm.sms.disablelog=64
+ro.product.ims=ims
+ro.sdcrypto.syscall=378
+persist.lgiqc.ext=1
+sys.lgiqc.crash=0
+persist.radio.atfwd.start=true
+ro.opengles.version=131072
+ro.sf.lcd_density=240
+wlan.chip.vendor=qcom
+wlan.chip.version=wcn
+wifi.lge.patch=true
+dhcp.dlna.using=false
+wifi.lge.sleeppolicy=0
+wifi.lge.offdelay=false
+wlan.lge.concurrency=MCC
+wlan.lge.supportsimaka=YES
+wifi.lge.hanglessid=false
+drm.service.enabled=true
+ro.lge.audio_soundexception=true
+ro.lge.audio_soundprofile=true
+ro.afwdata.LGfeatureset=TMUSBASE
+persist.lg.data.block_ssdp=0
+net.tethering.noprovisioning=true
+persist.lg.data.fd=-1
+persist.service.crash.enable=0
+audio.offload.disable=0
+lge.normalizer.param=Version2/true/7.0/true/12000/1.0/4000/0.55
+ro.qualcomm.sensors.qmd=false
+ro.qc.sdk.sensors.gestures=true
+ro.qualcomm.sensors.pedometer=false
+ro.qc.sensors.step_detector=true
+ro.qc.sensors.step_counter=true
+ro.qualcomm.sensors.pam=true
+ro.qualcomm.sensors.scrn_ortn=true
+ro.qualcomm.sensors.smd=true
+ro.qualcomm.sensors.game_rv=false
+ro.qualcomm.sensors.georv=true
+ro.qc.sensors.smgr_mag_cal_en=false
+ro.qc.sensors.max_grav_no_gyro=50
+ro.qc.sensors.max_geomag_rotvec=50
+debug.qualcomm.sns.hal=d
+debug.qualcomm.sns.daemon=w
+debug.qualcomm.sns.libsensor1=w
+persist.sys.ssr.restart_level=3
+persist.sys.strictmode.disable=true
+persist.sys.logkit.ctrlcode=0
+ro.lge.irrc.type=sw
+ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+persist.radio.apm_sim_not_pwdn=1
+ro.carrier=unknown
+dalvik.vm.heaptargetutilization=0.25
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=96m
+dalvik.vm.heapsize=256m
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+ro.telephony.default_network=0
+telephony.lteOnCdmaDevice=0
+persist.radio.rat_on=legacy
+wlan.lge.ccx=true
+persist.sys.dalvik.vm.lib=libdvm.so
+net.bt.name=Android
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
+ro.qc.sdk.izat.premium_enabled=1
+ro.qc.sdk.izat.service_mask=0x0
+persist.gps.qc_nlp_in_use=0
+ro.gps.agps_provider=1
+

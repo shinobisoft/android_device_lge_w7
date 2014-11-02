@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+
+    <!-- For SDCard Encryption -->
+    <permission name="com.lge.permission.SDENCRYPTION">
+        <group gid="mount" />
+    </permission>
+
+    <!-- For LG NFC service -->
+    <permission name="com.lge.permission.LGNFC">
+        <group gid="nfc" />
+    </permission>
+
+    <!-- For Bluetooth Factory Test -->
+    <permission name="com.lge.bluetooth.permission.BLUETOOTH_GROUP">
+        <group gid="bluetooth" />
+        <group gid="net_bt_stack" />
+    </permission>
+
+    <!-- 	LGE_CHANGE_S, [IMS][soonwoo.hwang@lge.com], 20130809, klp_porting { -->
+    <permission name="com.lge.permission.IMS" >
+        <group gid="system" />
+        <group gid="radio" />
+        <group gid="inet" />
+        <group gid="net_admin" />
+        <group gid="qcom_oncrpc" />
+        <group gid="audio" />
+        <group gid="camera" />
+        <group gid="media" />
+        <group gid="net_raw" />
+    </permission>
+    <!-- 	LGE_CHANGE_S, [IMS][soonwoo.hwang@lge.com], 20130809, klp_porting }  -->
+
+    <!-- For LG Keyguard -->
+    <permission name="com.lge.permission.KEYGUARD">
+        <group gid="lgkeyguard" />
+    </permission>
+
+    <!-- For LG kill-switch -->
+    <permission name="com.lge.permission.KILLSWITCH">
+        <group gid="lgmms" />
+    </permission>
+
+</permissions>

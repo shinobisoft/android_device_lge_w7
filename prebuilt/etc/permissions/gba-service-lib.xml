@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<permissions>
+    <library name="gba-service-lib"
+            file="/system/framework/gba-service-lib.jar"/>
+</permissions>
