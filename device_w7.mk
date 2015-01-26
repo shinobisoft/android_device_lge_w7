@@ -45,7 +45,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     device/lge/w7/prebuilt/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml
-ifeq ($TARGET_KERNEL_HAS_NFC),true)
+ifeq ($(TARGET_KERNEL_HAS_NFC),y)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
         frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
@@ -87,13 +87,13 @@ PRODUCT_COPY_FILES += \
     device/lge/w7/prebuilt/etc/boot_fixup:system/etc/boot_fixup \
     device/lge/w7/prebuilt/etc/quipc.conf:system/etc/quipc.conf
     
-ifeq ($TARGET_KERNEL_HAS_NFC),true)
-    PRODUCT_COPY_FILES += \
-        device/lge/w7/prebuilt/etc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-        device/lge/w7/prebuilt/etc/nfc-nci.conf:system/etc/nfc-nci.conf \
-        device/lge/w7/prebuilt/etc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-        device/lge/w7/prebuilt/etc/nfcee_access.xml:system/etc/nfcee_access.xml \
-        device/lge/w7/prebuilt/etc/init.d/10nfc_checker:system/etc/init.d/10nfc_checker
+ifeq ($(TARGET_USE_NFC),y)
+PRODUCT_COPY_FILES += \
+    device/lge/w7/prebuilt/etc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/lge/w7/prebuilt/etc/nfc-nci.conf:system/etc/nfc-nci.conf \
+    device/lge/w7/prebuilt/etc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    device/lge/w7/prebuilt/etc/nfcee_access.xml:system/etc/nfcee_access.xml \
+    device/lge/w7/prebuilt/etc/init.d/10nfc_checker:system/etc/init.d/10nfc_checker
 endif
 
 # Ramdisk
@@ -130,6 +130,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio.primary.msm8226 \
     audio_policy.msm8226 \
     audio.a2dp.default \
     audio.usb.default \
@@ -139,6 +140,9 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcompostprocbundle \
     libqcomvoiceprocessing \
+    libaudioroute \
+    libtinyalsa \
+    libtinycompress \
     tinycap \
     tinymix \
     tinypcminfo \
@@ -187,13 +191,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf \
     wpa_supplicant_overlay.conf \
+    libwpa_client \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf \
     libwcnss_qmi \
 
 # Charger
 PRODUCT_PACKAGES += charger charger_res_images
-
-# QRNGD
-PRODUCT_PACKAGES += qrngd
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -202,12 +207,12 @@ PRODUCT_PACKAGES += \
     libebtc
 
 # FM radio
-ifeq ($(TARGET_KERNEL_HAS_FM),true)
-    PRODUCT_PACKAGES += \
-        qcom.fmradio \
-        libqcomfm_jni \
-        FM2 \
-        FMRecord
+ifeq ($(BOARD_HAVE_QCOM_FM),true)
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
 endif
 
 # GPS
@@ -308,12 +313,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.request.master=true \
     ro.bluetooth.remote.autoconnect=true
 
+# LG IR
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.lge.eula_agreement=true
+    
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=true \
     qcom.hw.aac.encoder=true \
     af.resampler.quality=255 \
-    persist.audio.lowlatency.rec=false
+    persist.audio.lowlatency.rec=false \
+    persist.sys.media.use-awesome=true
 
 # WiFi
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -369,14 +379,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.call_recording.enabled=1
 
 # NFC packages
-ifeq ($(TARGET_KERNEL_HAS_NFC),true)
-    PRODUCT_PACKAGES += \
-        NfcNci \
-        Tag \
-        nfc_nci.w7 \
-        com.android.nfc_extras
+ifeq ($(TARGET_USE_NFC),y)
+PRODUCT_PACKAGES += \
+    NfcNci \
+    Tag \
+    nfc_nci.w7 \
+    com.android.nfc_extras
 
-    NFCEE_ACCESS_PATH := device/lge/w7/prebuilt/etc/nfcee_access.xml
+NFCEE_ACCESS_PATH := device/lge/w7/prebuilt/etc/nfcee_access.xml
 endif
 
 # QC time services
@@ -389,7 +399,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # CmUpdater
 #PRODUCT_PROPERTY_OVERRIDES += \
-#    cm.updater.uri=http://api.quarx.cm-for.us/api \
+#    cm.updater.uri=http://api.shinobisoft.x10.mx/api \
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=-5
 

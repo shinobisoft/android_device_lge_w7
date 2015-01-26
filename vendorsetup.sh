@@ -22,4 +22,6 @@
 
 #dd_lunch_combo full_mb526-eng
 add_lunch_combo cm_w7-userdebug
+add_lunch_combo cm_w7-user
+add_lunch_combo cm_w7-eng
 

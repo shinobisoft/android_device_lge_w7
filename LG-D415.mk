@@ -1,6 +1,4 @@
 # LG-D415 single sim. No OTG, NFC, and FM radio
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_CUSTOM_BOOTIMG_MK := device/lge/w7/mkbootimg.mk
 
 TARGET_BOARD_USE_DTS := msm8226-w7_tmo_us
 TARGET_KERNEL_CONFIG := w7_tmo_us_defconfig
@@ -11,8 +9,13 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
-# Some other custom variables.
-# Used to assist the build process
-TARGET_KERNEL_HAS_NFC := false
-TARGET_KERNEL_HAS_FM := true
+# D415 Audio
+AUDIO_FEATURE_DISABLED_FM := false
+BOARD_HAVE_QCOM_FM := true
+
+# D4XX NFC
+# Some other custom variables
+# Nfc
+BOARD_NFC_CHIPSET := 
+TARGET_USE_NFC := false
 

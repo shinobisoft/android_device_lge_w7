@@ -1,6 +1,4 @@
-
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_CUSTOM_BOOTIMG_MK := device/lge/w7/mkbootimg.mk
+# LG-D400 single sim. No OTG, NFC, and FM radio
 
 TARGET_BOARD_USE_DTS := msm8226-w7_global_sca
 TARGET_KERNEL_CONFIG := w7_global_sca_defconfig
@@ -11,7 +9,11 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
+# D400 Audio
+AUDIO_FEATURE_DISABLED_FM := true
+BOARD_HAVE_QCOM_FM := false
+
+# D400 NFC
 # Some other custom variables
-TARGET_KERNEL_HAS_NFC := false
-TARGET_KERNEL_HAS_FM := false
+TARGET_USE_NFC := false
 

@@ -1,6 +1,4 @@
 # LG-D400hn dual sim. With NFC and FM radio
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_CUSTOM_BOOTIMG_MK := device/lge/w7/mkbootimg.mk
 
 TARGET_BOARD_USE_DTS := msm8226-w7dsn_global_sca
 TARGET_KERNEL_CONFIG := w7dsn_global_sca_defconfig
@@ -11,7 +9,11 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
+# D400hn Audio
+AUDIO_FEATURE_DISABLED_FM := false
+BOARD_HAVE_QCOM_FM := true
+
+# D400hn NFC
 # Some other custom variables
-TARGET_KERNEL_HAS_NFC := true
-TARGET_KERNEL_HAS_FM := true
+TARGET_USE_NFC := true
 
